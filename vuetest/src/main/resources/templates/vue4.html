@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>发送请求</title>
+		<script src="/static/vue.js"></script>
+		<!-- 依赖于vue所以要写在下面 -->
+		<!-- 在vue上挂在 this.$http属性 -->
+		<script src="../vue-resource.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" name="" id="" value="get请求" @click="getInfo"/>
+			<input type="button" name="" id="" value="post请求" @click="postgetInfo"/>
+			<input type="button" name="" id="" value="jsonp请求" @click="jsonpInfo"/>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:'#app',
+				data:{},
+				methods:{
+					getInfo(){
+						// 发起get请求
+						this.$http.get('http://127.0.0.1:8080/user/getAll').then(function(map){
+							console.log(": " + map);
+						})
+					},
+					postgetInfo(){
+						this.$http.post('http://vue.studyit.io/api/post',{},{emulateJSON:true}).then(result =>{
+							console.log(result)
+						})
+					},
+					jsonpInfo(){
+						this.$http.jsonp('http://127.0.0.1:8080/user/getAll').then(result=>{
+							console.log(result)
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
